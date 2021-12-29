@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { HttpStatusCodes } from '../enums/HttpStatusCodes';
+import { BadRequestError } from '../errors/BadRequestError';
 import { WeatherService } from '../services/WeatherService';
 
 export class WeatherController {
