@@ -1,4 +1,6 @@
 name: Deploy
+env:
+  WEATHER_API: ${{secrets.WEATHER_API}}
 
 on:
   workflow_dispatch:
