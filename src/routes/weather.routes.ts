@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import { WeatherController } from '../controllers/WeatherController';
 
-const router = Router();
+const weather = Router();
+weather.get('/weather', WeatherController.findByCity);
 
-router.get('/api/v1/weather', WeatherController.findByCity);
-
-export { router };
+export { weather };

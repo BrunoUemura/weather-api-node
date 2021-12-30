@@ -1,1 +1,5 @@
-GET http://localhost:5000/api/v1/weather?city=calgary
+GET http://localhost:5000/api/v1/weather?city=
+
+###
+
+GET http://localhost:5000/api/v1/docs
