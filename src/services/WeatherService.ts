@@ -5,10 +5,6 @@ import { WeatherAPI } from './external/WeatherAPI';
 
 export class WeatherService {
   async findByCity(city: string) {
-    if (city === undefined) {
-      throw new BadRequestError('City parameter missing');
-    }
-
     const cityCapitalized = city.charAt(0).toUpperCase() + city.slice(1);
 
     const { data }: WeatherAPIResponse = await WeatherAPI.fetchExternalAPI(

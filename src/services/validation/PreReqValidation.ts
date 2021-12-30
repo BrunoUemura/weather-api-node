@@ -22,15 +22,13 @@ export class PreReqValidation {
 
   private static async checkExternalAPI(req: Request) {
     try {
-      const result = await WeatherAPI.fetchExternalAPI(
+      return await WeatherAPI.fetchExternalAPI(
         `${process.env.WEATHER_API}&q=${req.query.city}`,
       );
-
-      if (result.status !== HttpStatusCodes.OK || result === null) {
+    } catch (error: any) {
+      if (error.response.status !== HttpStatusCodes.OK) {
         throw new ServiceUnavailable('External Weather API Unavailable');
       }
-    } catch (error) {
-      throw new ServiceUnavailable('External Weather API Unavailable');
     }
   }
 }

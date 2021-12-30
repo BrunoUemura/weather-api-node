@@ -26,7 +26,9 @@ Send `GET` request to endpoints bellow:
 - `http://localhost:5000/api/v1/weather?city={CITY_NAME}`
 
 ### Example
-`GET` - `http://localhost:5000/api/v1/weather?city=calgary`
+Method: `GET` \
+Endpoint: `http://localhost:5000/api/v1/weather?city=calgary`
+
 ```json
 {
   "name": "Calgary",

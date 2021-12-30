@@ -22,10 +22,10 @@ describe('Pre Requisites Test', () => {
     expect(result.body.errors[0].message).toBe('Missing city parameter');
   });
 
-  it('should return external API error', async () => {
-    process.env.WEATHER_API = 'https://api.com';
+  it('should return external API Unavailable Error', async () => {
+    process.env.WEATHER_API = 'http://api.weatherapi.com/v1/current.json';
 
-    const city = 'campinas';
+    const city = 'calgary';
     const result = await request(server).get(`/api/v1/weather?city=${city}`);
 
     expect(result.statusCode).toBe(HttpStatusCodes.INTERNAL_SERVER_ERROR);
