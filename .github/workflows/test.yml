@@ -1,4 +1,6 @@
 name: CI Tests
+env:
+  WEATHER_API: ${{secrets.WEATHER_API}}
 
 on:
   push:

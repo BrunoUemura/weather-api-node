@@ -3,8 +3,7 @@ import axios from 'axios';
 export class WeatherAPI {
   static async fetchExternalAPI(city: string) {
     try {
-      const { data } = await axios.get(`${process.env.WEATHER_API}&q=${city}`);
-      return data;
+      return await axios.get(`${process.env.WEATHER_API}&q=${city}`);
     } catch (error) {
       throw error;
     }

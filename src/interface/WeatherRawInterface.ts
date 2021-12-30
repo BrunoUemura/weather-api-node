@@ -1,9 +1,13 @@
-export interface WeatherRawInterface {
+export interface WeatherAPIResponse {
+  data: WeatherRawInterface;
+}
+
+interface WeatherRawInterface {
   location: WeatherLocation;
   current: WeatherCurrent;
 }
 
-export interface WeatherLocation {
+interface WeatherLocation {
   name: string;
   region: string;
   country: string;
@@ -14,7 +18,7 @@ export interface WeatherLocation {
   localtime: string;
 }
 
-export interface WeatherCurrent {
+interface WeatherCurrent {
   last_updated_epoch: number;
   last_updated: string;
   temp_c: number;
@@ -40,7 +44,7 @@ export interface WeatherCurrent {
   gust_kph: number;
 }
 
-export interface WeatherCondition {
+interface WeatherCondition {
   text: string;
   icon: string;
   code: number;

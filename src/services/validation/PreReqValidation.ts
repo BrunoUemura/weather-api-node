@@ -1,0 +1,36 @@
+import { Request } from 'express';
+import { HttpStatusCodes } from '../../enums/HttpStatusCodes';
+import { BadRequestError } from '../../errors/BadRequestError';
+import { ServiceUnavailable } from '../../errors/ServiceUnavailable';
+import { WeatherAPI } from '../external/WeatherAPI';
+
+export class PreReqValidation {
+  public static async execute(req: Request) {
+    try {
+      this.paramsValidation(req);
+      await this.checkExternalAPI(req);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  private static paramsValidation(req: Request) {
+    if (req.query.city === undefined || req.query.city === '') {
+      throw new BadRequestError('Missing city parameter');
+    }
+  }
+
+  private static async checkExternalAPI(req: Request) {
+    try {
+      const result = await WeatherAPI.fetchExternalAPI(
+        `${process.env.WEATHER_API}&q=${req.query.city}`,
+      );
+
+      if (result.status !== HttpStatusCodes.OK || result === null) {
+        throw new ServiceUnavailable('External Weather API Unavailable');
+      }
+    } catch (error) {
+      throw new ServiceUnavailable('External Weather API Unavailable');
+    }
+  }
+}

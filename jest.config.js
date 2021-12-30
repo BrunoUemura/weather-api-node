@@ -4,5 +4,5 @@ module.exports = {
     collectCoverage: true,
     collectCoverageFrom: ["./src/**"],
     coverageDirectory: 'test/coverage',
-    // setupFiles: ['dotenv/config'],
+    setupFiles: ["./test/setup-tests.ts"]
 };

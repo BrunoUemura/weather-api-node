@@ -1,17 +1,17 @@
 import { BadRequestError } from '../errors/BadRequestError';
 import { WeatherInterface } from '../interface/WeatherInterface';
-import { WeatherRawInterface } from '../interface/WeatherRawInterface';
+import { WeatherAPIResponse } from '../interface/WeatherRawInterface';
 import { WeatherAPI } from './external/WeatherAPI';
 
 export class WeatherService {
   async findByCity(city: string) {
     if (city === undefined) {
-      throw new BadRequestError('City param missing');
+      throw new BadRequestError('City parameter missing');
     }
 
     const cityCapitalized = city.charAt(0).toUpperCase() + city.slice(1);
 
-    const data: WeatherRawInterface = await WeatherAPI.fetchExternalAPI(
+    const { data }: WeatherAPIResponse = await WeatherAPI.fetchExternalAPI(
       cityCapitalized,
     );
 

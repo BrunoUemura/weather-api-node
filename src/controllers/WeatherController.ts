@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { HttpStatusCodes } from '../enums/HttpStatusCodes';
-import { BadRequestError } from '../errors/BadRequestError';
+import { PreReqValidation } from '../services/validation/PreReqValidation';
 import { WeatherService } from '../services/WeatherService';
 
 export class WeatherController {
@@ -8,6 +8,7 @@ export class WeatherController {
     const city = String(req.query.city);
 
     try {
+      await PreReqValidation.execute(req);
       const service = new WeatherService();
       const result = await service.findByCity(city);
       return res.status(HttpStatusCodes.OK).send(result);
