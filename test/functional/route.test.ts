@@ -7,6 +7,8 @@ describe('App functionallity test', () => {
     const city = 'calgary';
     const result = await request(server).get(`/api/v1/weather?city=${city}`);
 
+    console.log(result);
+
     expect(result.statusCode).toBe(HttpStatusCodes.OK);
 
     expect(result.body).toHaveProperty('name');
