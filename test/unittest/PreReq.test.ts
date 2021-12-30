@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 afterAll(() => {
-  process.env = OLD_ENV; // Restore old environment
+  process.env = OLD_ENV;
 });
 
 describe('Pre Requisites Test', () => {
@@ -33,5 +33,15 @@ describe('Pre Requisites Test', () => {
     expect(result.body.errors[0].message).toBe(
       'External Weather API Unavailable',
     );
+  });
+
+  it('should return INTERNAL_SERVER_ERROR', async () => {
+    process.env.WEATHER_API = '';
+
+    const city = 'calgary';
+    const result = await request(server).get(`/api/v1/weather?city=${city}`);
+
+    expect(result.statusCode).toBe(HttpStatusCodes.INTERNAL_SERVER_ERROR);
+    expect(result.body.errors[0].message).toBe('Something went wrong');
   });
 });
