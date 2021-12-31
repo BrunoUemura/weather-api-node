@@ -1,10 +1,9 @@
 export interface WeatherAPIResponse {
-  data: WeatherRawInterface;
-}
-
-interface WeatherRawInterface {
-  location: WeatherLocation;
-  current: WeatherCurrent;
+  data: {
+    location: WeatherLocation;
+    current: WeatherCurrent;
+    forecast: WeatherForecast;
+  };
 }
 
 interface WeatherLocation {
@@ -24,7 +23,11 @@ interface WeatherCurrent {
   temp_c: number;
   temp_f: number;
   is_day: number;
-  condition: WeatherCondition;
+  condition: {
+    text: string;
+    icon: string;
+    code: number;
+  };
   wind_mph: number;
   wind_kph: number;
   wind_degree: number;
@@ -44,8 +47,22 @@ interface WeatherCurrent {
   gust_kph: number;
 }
 
-interface WeatherCondition {
-  text: string;
-  icon: string;
-  code: number;
+interface WeatherForecast {
+  forecastday: [
+    {
+      date: string;
+      day: {
+        maxtemp_c: number;
+        maxtemp_f: number;
+        mintemp_c: number;
+        mintemp_f: number;
+        avgtemp_c: number;
+        avgtemp_f: number;
+        condition: {
+          text: string;
+          icon: string;
+        };
+      };
+    },
+  ];
 }

@@ -9,4 +9,19 @@ export interface WeatherInterface {
   feelsLikeInF: number | undefined;
   condition: string | undefined;
   humidity: number | undefined;
+  forecast: WeatherForcast[] | undefined;
+}
+
+interface WeatherForcast {
+  date: string;
+  maxTemperatureInC: number;
+  maxTemperatureInF: number;
+  minTemperatureInC: number;
+  minTemperatureInF: number;
+  avgTemperatureInC: number;
+  avgTemperatureInf: number;
+  condition: {
+    text: string;
+    icon: string;
+  };
 }

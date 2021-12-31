@@ -22,7 +22,24 @@ export class WeatherService {
       feelsLikeInF: data.current.feelslike_f,
       condition: data.current.condition.text,
       humidity: data.current.humidity,
+      forecast: undefined,
     };
+
+    result.forecast = data.forecast.forecastday.map(day => {
+      return {
+        date: day.date,
+        maxTemperatureInC: day.day.maxtemp_c,
+        maxTemperatureInF: day.day.maxtemp_f,
+        minTemperatureInC: day.day.mintemp_c,
+        minTemperatureInF: day.day.mintemp_f,
+        avgTemperatureInC: day.day.avgtemp_c,
+        avgTemperatureInf: day.day.avgtemp_f,
+        condition: {
+          text: day.day.condition.text,
+          icon: day.day.condition.icon,
+        },
+      };
+    });
 
     return result;
   }
